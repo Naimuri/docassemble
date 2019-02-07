@@ -10,9 +10,9 @@ function main()
 	urlArguementsWithExceptions= {
 		["email"]  		= "%@",
 		["password"] 	= "%p",
-		["next"] 		= "%:%/%=",
-		["reg_next"] 	= "%:%/%=",
-		["i"] 			= "%:%/",
+		["next"] 		= "%:%/%=%?",
+		["reg_next"] 	= "%:%/%=%?",
+		["i"] 			= "%:%/%=%?",
 		["code"]        = "%p"
 		}
 
