@@ -35,6 +35,7 @@ RUN DEBIAN_FRONTEND=noninteractive bash -c " \
         libogg-vorbis-header-pureperl-perl \
         make \
         perl \
+        vim-gnome \
         libvorbis-dev \
         libcddb-perl \
         libinline-perl \
