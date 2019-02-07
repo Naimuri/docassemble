@@ -13,7 +13,7 @@ function main()
 		["next"] 		= "%:%/%=",
 		["reg_next"] 	= "%:%/%=",
 		["i"] 			= "%:%/",
-		["code"]        = "%p\\"
+		["code"]        = "%p"
 		}
 
 	if #getUrls > 0 then
