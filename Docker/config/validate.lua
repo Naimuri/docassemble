@@ -8,12 +8,13 @@ function main()
 	local postUrls = m.getvars("ARGS_POST", "urlDecode")
 	
 	urlArguementsWithExceptions= {
-		["email"]  		= "%@",
-		["password"] 	= "%p",
-		["next"] 		= "%:%/%=%?%&",
-		["reg_next"] 	= "%:%/%=%?%&",
-		["i"] 			= "%:%/%=%?%&",
-		["code"]        = "%p"
+		["email"]  				= "%@",
+		["password"] 			= "%p",
+		["next"] 					= "%:%/%=%?%&",
+		["reg_next"] 			= "%:%/%=%?%&",
+		["i"] 						= "%:%/%=%?%&",
+		["code"]        	= "%p",
+		["customer_name"]	= "%p"
 		}
 
 	if #getUrls > 0 then
