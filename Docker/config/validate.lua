@@ -10,7 +10,7 @@ function main()
 	urlArguementsWithExceptions= {
 		["action"] = "%p",
 		["_action"] = "%p",
-		["config_config"] = "%p",
+		["config_content"] = "%p",
 		["email"]  				= "%@",
 		["password"] 			= "%p",
 		["next"] 					= "%:%/%=%?%&",
