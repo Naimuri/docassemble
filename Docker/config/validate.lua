@@ -8,6 +8,9 @@ function main()
 	local postUrls = m.getvars("ARGS_POST", "urlDecode")
 	
 	urlArguementsWithExceptions= {
+		["action"] = "%p",
+		["_action"] = "%p",
+		["config_config"] = "%p",
 		["email"]  				= "%@",
 		["password"] 			= "%p",
 		["next"] 					= "%:%/%=%?%&",
