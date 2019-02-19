@@ -179,6 +179,7 @@ RUN DEBIAN_FRONTEND=noninteractive TERM=xterm \
         /usr/share/docassemble/files \
         /var/www/.pip \
         /var/www/.cache \
+        /var/www/html/error \
         /usr/share/docassemble/log \
         /tmp/docassemble \
         /var/www/html/log && \
@@ -230,6 +231,8 @@ RUN DEBIAN_FRONTEND=noninteractive TERM=xterm \
     cp /tmp/docassemble/Docker/config/exim4-main /etc/exim4/conf.d/main/01_docassemble && \
     cp /tmp/docassemble/Docker/config/exim4-acl /etc/exim4/conf.d/acl/29_docassemble && \
     cp /tmp/docassemble/Docker/config/exim4-update /etc/exim4/update-exim4.conf.conf && \
+    cp /tmp/docassemble/Docker/config/localized-error-pages.conf /etc/apache2/conf-enabled/localized-error-pages.conf && \
+    cp /tmp/docassemble/Docker/config/service_unavailable.html /var/www/html/error/service_unavailable.html && \
     update-exim4.conf && \
     bash -c "chown www-data.www-data /usr/share/docassemble/config && \
         chown www-data.www-data /usr/share/docassemble/config/config.yml.dist /usr/share/docassemble/webapp/docassemble.wsgi && \

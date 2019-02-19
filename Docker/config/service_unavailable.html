@@ -1,0 +1,67 @@
+<html>
+<style>
+  body{
+    font-family: sans-serif;
+  }
+
+
+
+  .main-text {
+    margin: 0 auto;
+    text-align: center;
+    margin-top:10%;
+    color: #00c878;
+    font-weight: 700;
+    max-width:900px;
+    font-size:3.4em;
+  }
+  .refresh-text{
+    color: gray;
+    font-weight: 300;
+    font-size: 0.7em;
+  }
+  .instruction-text{
+    color: gray;
+    font-weight: 500;
+    font-size: 0.4em;
+  }
+
+
+
+
+</style>
+
+<!-- this script controls the timer, timer display, and reloads the pag -->
+<head>
+  <title>oops... we encountered a problem</title>
+</head>
+
+<body>
+
+
+
+    <div class="main-text">We're sorry, we encountered a minor problem.
+      <p class="refresh-text">We will try to automatically recover the error in <br><a style="font-size: 3.6em" id="count">5</a></p>
+      <p class="instruction-text">If the error still occurs, try manually refreshing the page. If the problem persists, please contact support.</p>
+    </div>
+
+
+
+
+
+</body>
+
+<script>
+
+    var i=5;
+    setInterval(function(){
+      if (i==0){
+        location.reload(true);
+      } else{
+        document.getElementById("count").innerHTML = i;
+        i--;
+      }
+
+    }, 1000);
+</script>
+</html>
