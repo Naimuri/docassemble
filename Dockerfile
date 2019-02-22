@@ -285,6 +285,11 @@ RUN rm -rf /tmp/docassemble && \
     sed -i '5 a SecRule REQUEST_URI "@beginsWith /apache_access.log" "phase:1,id:12702,allow"' /etc/modsecurity/crs/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf && \
     sed -i '6 a SecRule REQUEST_URI "@beginsWith /docassemble.log" "phase:1,id:12703,allow"' /etc/modsecurity/crs/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf && \
     sed -i '7 a SecRule REQUEST_URI "@beginsWith /worker.log" "phase:1,id:12704,allow"' /etc/modsecurity/crs/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf && \
+    sed -i '8 a SecRule REQUEST_URI "@beginsWith /assessment/config" "phase:1,id:12705,allow"' /etc/modsecurity/crs/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf && \
+    sed -i '9 a SecRule REQUEST_URI "@beginsWith /assessment/logfile/aura.log" "phase:1,id:12706,allow"' /etc/modsecurity/crs/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf && \
+    sed -i '10 a SecRule REQUEST_URI "@beginsWith /assessment/logfile/worker.log" "phase:1,id:12707,allow"' /etc/modsecurity/crs/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf && \
+    sed -i '11 a SecRule REQUEST_URI "@beginsWith /assessment/logfile/apache_access.log" "phase:1,id:12708,allow"' /etc/modsecurity/crs/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf && \
+    sed -i '12 a SecRule REQUEST_URI "@beginsWith /assessment/logfile/apache_error.log" "phase:1,id:12709,allow"' /etc/modsecurity/crs/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf && \
     sed -i -e 's/^\(daemonize\s*\)yes\s*$/\1no/g' -e 's/^bind 127.0.0.1/bind 0.0.0.0/g' /etc/redis/redis.conf && \
     sed -i -e 's/#APACHE_ULIMIT_MAX_FILES/APACHE_ULIMIT_MAX_FILES/' -e 's/ulimit -n 65536/ulimit -n 8192/' /etc/apache2/envvars && \
     echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && \
