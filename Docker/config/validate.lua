@@ -32,8 +32,18 @@ function main()
 	local args_string = table.tostring(inputUrls)
 	local inputUrlsCount = #inputUrls
 	local sanitizedUrlInputs = sanitize_url_inputs(inputUrls, inputUrlsCount)
+	local arguementResult = verify_args(sanitizedUrlInputs)
+	local arguementNameResult = verify_arg_names(sanitizedUrlInputs)
 
-	return verify_args(sanitizedUrlInputs)	
+	local result = nil
+
+  if arguementResult == nil and arguementNameResult == nil then
+		result = nil
+	else
+		result = "Malicious string detected"
+	end
+
+	return result	
 end
 
 function sanitize_url_inputs (inputUrls, inputUrlsCount)
@@ -100,6 +110,21 @@ function sanitize_url_inputs (inputUrls, inputUrlsCount)
 	end
 
 	return sanitizedUrlInputs
+end
+
+-- verify arguement names added for .gathered exploit
+function verify_arg_names(argnames)
+	local result
+	for i,v in ipairs(argnames) do
+		local argname, argValue = v:match("([^,]+),([^,]+)")
+
+		if argname then
+			if has_illegal_characters(argname) then
+				result = "URL argname contains illegal characters"
+			end
+		end
+	end
+	return result
 end
 
 -- decodes arguements and checks for illegal strings
