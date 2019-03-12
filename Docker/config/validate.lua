@@ -311,6 +311,14 @@ function is_base_64_encoded (stringToCheck)
 	return false
 end
 
+-- utility methods to verify if a string is base64 encoded
+function is_base_64_encoded (stringToCheck)
+	if #stringToCheck >= 4 and #stringToCheck % 4 == 0 and not hasInvalidBase64Characters(stringToCheck) and not cannotDecode(stringToCheck) then
+	return true
+end
+	return false
+end
+
 function hasInvalidBase64Characters (stringToCheck)
 
 	local totalChars = #stringToCheck
