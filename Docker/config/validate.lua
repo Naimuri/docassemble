@@ -303,16 +303,6 @@ end
 
 -- utility methods to verify if a string is base64 encoded
 function is_base_64_encoded (stringToCheck)
-    if #stringToCheck >= 4 and #stringToCheck % 4 == 0 and stringToCheck:find('[0-9]') and stringToCheck:find('[a-z, A-Z]') and not hasInvalidBase64Characters(stringToCheck) and not cannotDecode(stringToCheck) then
-
-		return true
-	end
-
-	return false
-end
-
--- utility methods to verify if a string is base64 encoded
-function is_base_64_encoded (stringToCheck)
 	if #stringToCheck >= 4 and #stringToCheck % 4 == 0 and not hasInvalidBase64Characters(stringToCheck) and not cannotDecode(stringToCheck) then
 	return true
 end
