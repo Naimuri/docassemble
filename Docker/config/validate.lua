@@ -6,7 +6,8 @@ Exceptions to the rule can be added for certain arguements e.g. a password argue
 function main()
 	local getUrls = m.getvars("ARGS_GET", "urlDecode")
 	local postUrls = m.getvars("ARGS_POST", "urlDecode")
-	
+	local argsNames = m.getvars("ARGS_NAMES", "urlDecode")
+
 	urlArguementsWithExceptions= {
     ["action"] = "%p",
 		["_action"] = "%p",
@@ -29,12 +30,13 @@ function main()
 		inputUrls = {}
 	end
 
-	local args_string = table.tostring(inputUrls)
 	local inputUrlsCount = #inputUrls
 	local sanitizedUrlInputs = sanitize_url_inputs(inputUrls, inputUrlsCount)
-	local arguementResult = verify_args(sanitizedUrlInputs)
-	local arguementNameResult = verify_arg_names(sanitizedUrlInputs)
+	local argsNamesCount = #argsNames
+	local sanitizedArgNames = sanitize_url_inputs(argsNames, argsNamesCount)
 
+	local arguementResult = verify_args(sanitizedUrlInputs)
+	local arguementNameResult = verify_arg_names(sanitizedArgNames)
 	local result = nil
 
   if arguementResult == nil and arguementNameResult == nil then
@@ -43,7 +45,8 @@ function main()
 		result = "Malicious string detected"
 	end
 
-	return result	
+	return result
+
 end
 
 function sanitize_url_inputs (inputUrls, inputUrlsCount)
@@ -56,7 +59,7 @@ function sanitize_url_inputs (inputUrls, inputUrlsCount)
 		inputUrlsCount = inputUrlsCount - 1
 	end
 
-	-- sanitise POST and GET args
+	-- sanitise POST, GET and NAME args
 	for i,v in ipairs(sanitizedUrlInputs) do
 
 		if string.find(v, "ARGS_POST:") then
@@ -64,6 +67,9 @@ function sanitize_url_inputs (inputUrls, inputUrlsCount)
 			sanitizedUrlInputs [i] = newValue
 		elseif string.find(v, "ARGS_GET:") then
 			newValue = string.gsub(v, "ARGS_GET:", "")
+			sanitizedUrlInputs [i] = newValue
+		elseif string.find(v, "ARGS_NAMES:") then
+			newValue = string.gsub(v, "ARGS_NAMES:", "")
 			sanitizedUrlInputs [i] = newValue
 		end
 	end
@@ -118,7 +124,19 @@ function verify_arg_names(argnames)
 	for i,v in ipairs(argnames) do
 		local argname, argValue = v:match("([^,]+),([^,]+)")
 
+		-- deal with nested base64 encoded argnames e.g. devices.owned['c2VydmVycw==']
 		if argname then
+			if argname:find('%b[]') then
+				-- check the value in the quotes
+				local index0, index1 = string.find(argname, "%b''")
+				local unknownArg = string.sub(argname, index0+1, index1-1)
+			  -- if encoded decode
+				if (is_base_64_encoded(unknownArg)) then
+					unknownArg = base64_decode_string (unknownArg)
+					-- rebuild with decoded value
+					argname = string.gsub(argname, "%b[]", "."..unknownArg)
+				end
+			end
 			if has_illegal_characters(argname) then
 				result = "URL argname contains illegal characters"
 			end
@@ -315,7 +333,7 @@ function cannotDecode (stringToCheck)
 
 	-- m.log (1, "decoded string " .. stringToCheck .. " " .. decodedStringAttempt)
 
-	for c in decodedStringAttempt:gmatch("[%w%p]") do
+	for c in decodedStringAttempt:gmatch("[%w%p%s]") do
 		legalCharacters = legalCharacters + 1
 	end
 
