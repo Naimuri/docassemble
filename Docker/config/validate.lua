@@ -13,6 +13,7 @@ function main()
 		["_action"] = "%p",
 		["config_content"] = "%p",
 		["email"]  		= "%@%+",
+		["filename"]  = "%:%/",
 		["password"] 	= "%p",
 		["next"] 		= "%:%/%=%?%&",
 		["reg_next"] 	= "%:%/%=%?%&",
