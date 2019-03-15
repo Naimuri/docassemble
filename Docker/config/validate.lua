@@ -14,13 +14,15 @@ function main()
 		["config_content"] = "%p",
 		["email"]  		= "%@%+",
 		["filename"]  = "%:%/",
-		["password"] 	= "%p",
+ 		["password"] 	= "%p",
 		["next"] 		= "%:%/%=%?%&",
 		["reg_next"] 	= "%:%/%=%?%&",
 		["i"] 			= "%:%/%=%?%&",
 		["code"]        = "%p",
 		["customer_name"]	= "%p%Yä%Yé%Yö%Yñ",  
-		["timezone"] = "%/"          
+		["timezone"] = "%/",
+		["pypi_username"] = "%p",
+		["pypi_password"] = "%p"
 		}
 
 	if #getUrls > 0 then
