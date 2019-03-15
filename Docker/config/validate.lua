@@ -329,14 +329,19 @@ function cannotDecode (stringToCheck)
 	local decodedStringAttempt = base64_decode_string(stringToCheck)
 	local decodedStringAttemptLength = #decodedStringAttempt
 	local legalCharacters = 0
-
-	-- m.log (1, "decoded string " .. stringToCheck .. " " .. decodedStringAttempt)
+	local nonAlphaChars = 0
 
 	for c in decodedStringAttempt:gmatch("[%w%p%s]") do
 		legalCharacters = legalCharacters + 1
 	end
 
-	if legalCharacters == decodedStringAttemptLength then
+	for c in decodedStringAttempt:gmatch("[%p]") do
+		nonAlphaChars = nonAlphaChars + 1
+	end
+
+	if nonAlphaChars == decodedStringAttemptLength then
+		return true
+	elseif legalCharacters == decodedStringAttemptLength then
 		return false
 	else
 		return true
