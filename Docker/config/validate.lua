@@ -8,22 +8,7 @@ function main()
 	local postUrls = m.getvars("ARGS_POST", "urlDecode")
 	local argsNames = m.getvars("ARGS_NAMES", "urlDecode")
 
-	urlArguementsWithExceptions= {
-    ["action"] = "%p",
-		["_action"] = "%p",
-		["config_content"] = "%p",
-		["email"]  		= "%@%+",
-		["filename"]  = "%:%/",
- 		["password"] 	= "%p",
-		["next"] 		= "%:%/%=%?%&",
-		["reg_next"] 	= "%:%/%=%?%&",
-		["i"] 			= "%:%/%=%?%&",
-		["code"]        = "%p",
-		["customer_name"]	= "%p%Yä%Yé%Yö%Yñ",  
-		["timezone"] = "%/",
-		["pypi_username"] = "%p",
-		["pypi_password"] = "%p"
-		}
+        -- TODO inject rules at build time
 
 	if #getUrls > 0 then
 		inputUrls = getUrls
