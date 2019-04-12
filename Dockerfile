@@ -172,17 +172,17 @@ RUN DEBIAN_FRONTEND=noninteractive TERM=xterm \
     wget https://github.com/jgm/pandoc/releases/download/2.5/pandoc-2.5-1-amd64.deb && \
     dpkg -i pandoc-2.5-1-amd64.deb && \
     rm pandoc-2.5-1-amd64.deb && \
-    mkdir -p /etc/ssl/aura \
-    /usr/share/aura/local \
-    /usr/share/aura/certs \
-    /usr/share/aura/backup \
-    /usr/share/aura/config \
-    /usr/share/aura/webapp \
-    /usr/share/aura/files \
+    mkdir -p /etc/ssl/docassemble \
+    /usr/share/docassemble/local \
+    /usr/share/docassemble/certs \
+    /usr/share/docassemble/backup \
+    /usr/share/docassemble/config \
+    /usr/share/docassemble/webapp \
+    /usr/share/docassemble/files \
     /var/www/.pip \
     /var/www/.cache \
-    /usr/share/aura/log \
-    /tmp/aura \
+    /usr/share/docassemble/log \
+    /tmp/docassemble \
     /usr/share/lua/5.1 \
     /var/www/html/log && \
     echo '{ "args": ["--no-sandbox"] }' > /var/www/puppeteer-config.json && \
@@ -196,7 +196,7 @@ RUN DEBIAN_FRONTEND=noninteractive TERM=xterm \
 
 
 RUN DEBIAN_FRONTEND=noninteractive TERM=xterm \
-    cd /usr/share/aura && \
+    cd /usr/share/docassemble && \
     git clone https://github.com/letsencrypt/letsencrypt && \
     cd letsencrypt && \
     ./letsencrypt-auto --help && \
@@ -204,44 +204,44 @@ RUN DEBIAN_FRONTEND=noninteractive TERM=xterm \
     echo "listen_addresses = '*'" >> /etc/postgresql/9.6/main/postgresql.conf
 
 
-COPY . /tmp/aura/
+COPY . /tmp/docassemble/
 
 RUN DEBIAN_FRONTEND=noninteractive TERM=xterm \
     ln -s /var/mail/mail /var/mail/root && \
-    cp /tmp/aura/aura_webapp/aura.wsgi /usr/share/aura/webapp/ && \
-    cp /tmp/aura/Docker/*.sh /usr/share/aura/webapp/ && \
-    cp /tmp/aura/Docker/VERSION /usr/share/aura/webapp/ && \
-    cp /tmp/aura/Docker/pip.conf /usr/share/aura/local/ && \
-    cp /tmp/aura/Docker/config/* /usr/share/aura/config/ && \
-    cp /tmp/aura/Docker/cgi-bin/index.sh /usr/lib/cgi-bin/ && \
-    cp /tmp/aura/Docker/syslog-ng.conf /usr/share/aura/webapp/syslog-ng.conf && \
-    cp /tmp/aura/Docker/syslog-ng-docker.conf /usr/share/aura/webapp/syslog-ng-docker.conf && \
-    cp /tmp/aura/Docker/aura-syslog-ng.conf /usr/share/aura/webapp/aura-syslog-ng.conf && \
-    cp /tmp/aura/Docker/apache.logrotate /etc/logrotate.d/apache2 && \
-    cp /tmp/aura/Docker/aura.logrotate /etc/logrotate.d/aura && \
-    cp /tmp/aura/Docker/cron/aura-cron-monthly.sh /etc/cron.monthly/aura && \
-    cp /tmp/aura/Docker/cron/aura-cron-weekly.sh /etc/cron.weekly/aura && \
-    cp /tmp/aura/Docker/cron/aura-cron-daily.sh /etc/cron.daily/aura && \
-    cp /tmp/aura/Docker/cron/aura-cron-hourly.sh /etc/cron.hourly/aura && \
-    cp /tmp/aura/Docker/aura.conf /etc/apache2/conf-available/ && \
-    cp /tmp/aura/Docker/aura-behindlb.conf /etc/apache2/conf-available/ && \
-    cp /tmp/aura/Docker/aura-supervisor.conf /etc/supervisor/conf.d/aura.conf && \
-    cp /tmp/aura/Docker/ssl/* /usr/share/aura/certs/ && \
-    cp /tmp/aura/Docker/rabbitmq.config /etc/rabbitmq/ && \
-    cp /tmp/aura/Docker/config/exim4-router /etc/exim4/conf.d/router/101_aura && \
-    cp /tmp/aura/Docker/config/exim4-filter /etc/exim4/aura-filter && \
-    cp /tmp/aura/Docker/config/exim4-main /etc/exim4/conf.d/main/01_aura && \
-    cp /tmp/aura/Docker/config/exim4-acl /etc/exim4/conf.d/acl/29_aura && \
-    cp /tmp/aura/Docker/config/exim4-update /etc/exim4/update-exim4.conf.conf && \
-    cp /tmp/aura/Docker/config/validate.lua /etc/modsecurity/validate.lua && \
-    cp /tmp/aura/Docker/config/verification.lua /usr/share/lua/5.1/verification.lua && \
-    cp /tmp/aura/Docker/config/utilities.lua /usr/share/lua/5.1/utilities.lua && \
+    cp /tmp/docassemble/docassemble_webapp/docassemble.wsgi /usr/share/docassemble/webapp/ && \
+    cp /tmp/docassemble/Docker/*.sh /usr/share/docassemble/webapp/ && \
+    cp /tmp/docassemble/Docker/VERSION /usr/share/docassemble/webapp/ && \
+    cp /tmp/docassemble/Docker/pip.conf /usr/share/docassemble/local/ && \
+    cp /tmp/docassemble/Docker/config/* /usr/share/docassemble/config/ && \
+    cp /tmp/docassemble/Docker/cgi-bin/index.sh /usr/lib/cgi-bin/ && \
+    cp /tmp/docassemble/Docker/syslog-ng.conf /usr/share/docassemble/webapp/syslog-ng.conf && \
+    cp /tmp/docassemble/Docker/syslog-ng-docker.conf /usr/share/docassemble/webapp/syslog-ng-docker.conf && \
+    cp /tmp/docassemble/Docker/docassemble-syslog-ng.conf /usr/share/docassemble/webapp/docassemble-syslog-ng.conf && \
+    cp /tmp/docassemble/Docker/apache.logrotate /etc/logrotate.d/apache2 && \
+    cp /tmp/docassemble/Docker/docassemble.logrotate /etc/logrotate.d/docassemble && \
+    cp /tmp/docassemble/Docker/cron/docassemble-cron-monthly.sh /etc/cron.monthly/docassemble && \
+    cp /tmp/docassemble/Docker/cron/docassemble-cron-weekly.sh /etc/cron.weekly/docassemble && \
+    cp /tmp/docassemble/Docker/cron/docassemble-cron-daily.sh /etc/cron.daily/docassemble && \
+    cp /tmp/docassemble/Docker/cron/docassemble-cron-hourly.sh /etc/cron.hourly/docassemble && \
+    cp /tmp/docassemble/Docker/docassemble.conf /etc/apache2/conf-available/ && \
+    cp /tmp/docassemble/Docker/docassemble-behindlb.conf /etc/apache2/conf-available/ && \
+    cp /tmp/docassemble/Docker/docassemble-supervisor.conf /etc/supervisor/conf.d/docassemble.conf && \
+    cp /tmp/docassemble/Docker/ssl/* /usr/share/docassemble/certs/ && \
+    cp /tmp/docassemble/Docker/rabbitmq.config /etc/rabbitmq/ && \
+    cp /tmp/docassemble/Docker/config/exim4-router /etc/exim4/conf.d/router/101_docassemble && \
+    cp /tmp/docassemble/Docker/config/exim4-filter /etc/exim4/docassemble-filter && \
+    cp /tmp/docassemble/Docker/config/exim4-main /etc/exim4/conf.d/main/01_docassemble && \
+    cp /tmp/docassemble/Docker/config/exim4-acl /etc/exim4/conf.d/acl/29_docassemble && \
+    cp /tmp/docassemble/Docker/config/exim4-update /etc/exim4/update-exim4.conf.conf && \
+    cp /tmp/docassemble/Docker/config/validate.lua /etc/modsecurity/validate.lua && \
+    cp /tmp/docassemble/Docker/config/verification.lua /usr/share/lua/5.1/verification.lua && \
+    cp /tmp/docassemble/Docker/config/utilities.lua /usr/share/lua/5.1/utilities.lua && \
     update-exim4.conf && \
-    bash -c "chown www-data.www-data /usr/share/aura/config && \
-    chown www-data.www-data /usr/share/aura/config/config.yml.dist /usr/share/aura/webapp/aura.wsgi && \
-    chown -R www-data.www-data /tmp/aura /usr/share/aura/local /usr/share/aura/log /usr/share/aura/files && \
-    chmod ogu+r /usr/share/aura/config/config.yml.dist && \
-    chmod 755 /etc/ssl/aura && \
+    bash -c "chown www-data.www-data /usr/share/docassemble/config && \
+    chown www-data.www-data /usr/share/docassemble/config/config.yml.dist /usr/share/docassemble/webapp/docassemble.wsgi && \
+    chown -R www-data.www-data /tmp/docassemble /usr/share/docassemble/local /usr/share/docassemble/log /usr/share/docassemble/files && \
+    chmod ogu+r /usr/share/docassemble/config/config.yml.dist && \
+    chmod 755 /etc/ssl/docassemble && \
     cd /tmp && \
     wget https://bootstrap.pypa.io/get-pip.py && \
     python get-pip.py && \
@@ -253,8 +253,8 @@ RUN DEBIAN_FRONTEND=noninteractive TERM=xterm \
 USER www-data
 
 RUN bash -c "cd /tmp && \
-    virtualenv /usr/share/aura/local && \
-    source /usr/share/aura/local/bin/activate && \
+    virtualenv /usr/share/docassemble/local && \
+    source /usr/share/docassemble/local/bin/activate && \
     pip install --upgrade pip && \
     pip install \
     3to2 \
@@ -271,25 +271,25 @@ RUN bash -c "cd /tmp && \
     'git+https://github.com/nekstrom/pyrtf-ng#egg=pyrtf-ng' \
     'git+https://github.com/euske/pdfminer.git' \
     simplekv==0.10.0 \
-    /tmp/aura/aura \
-    /tmp/aura/aura_base \
-    /tmp/aura/aura_demo \
-    /tmp/aura/aura_webapp"
+    /tmp/docassemble/docassemble \
+    /tmp/docassemble/docassemble_base \
+    /tmp/docassemble/docassemble_demo \
+    /tmp/docassemble/docassemble_webapp"
 
 
 USER root
 
-RUN rm -rf /tmp/aura && \
+RUN rm -rf /tmp/docassemble && \
     rm -f /etc/cron.daily/apt-compat && \
     mv /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf && \
     sed -i -e 's/SecRuleEngine DetectionOnly/SecRuleEngine On/' /etc/modsecurity/modsecurity.conf && \
     sed -i '6 a secRuleScript "/etc/modsecurity/validate.lua" "deny"' /etc/modsecurity/modsecurity.conf && \
     sed -i '4 a SecRule REQUEST_URI "@beginsWith /apache_error.log" "phase:1,id:12701,allow"' /etc/modsecurity/crs/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf && \
     sed -i '5 a SecRule REQUEST_URI "@beginsWith /apache_access.log" "phase:1,id:12702,allow"' /etc/modsecurity/crs/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf && \
-    sed -i '6 a SecRule REQUEST_URI "@beginsWith /aura.log" "phase:1,id:12703,allow"' /etc/modsecurity/crs/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf && \
+    sed -i '6 a SecRule REQUEST_URI "@beginsWith /docassemble.log" "phase:1,id:12703,allow"' /etc/modsecurity/crs/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf && \
     sed -i '7 a SecRule REQUEST_URI "@beginsWith /worker.log" "phase:1,id:12704,allow"' /etc/modsecurity/crs/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf && \
     sed -i '8 a SecRule REQUEST_URI "@beginsWith /assessment/config" "phase:1,id:12705,allow"' /etc/modsecurity/crs/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf && \
-    sed -i '9 a SecRule REQUEST_URI "@beginsWith /assessment/logfile/aura.log" "phase:1,id:12706,allow"' /etc/modsecurity/crs/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf && \
+    sed -i '9 a SecRule REQUEST_URI "@beginsWith /assessment/logfile/docassemble.log" "phase:1,id:12706,allow"' /etc/modsecurity/crs/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf && \
     sed -i '10 a SecRule REQUEST_URI "@beginsWith /assessment/logfile/worker.log" "phase:1,id:12707,allow"' /etc/modsecurity/crs/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf && \
     sed -i '11 a SecRule REQUEST_URI "@beginsWith /assessment/logfile/apache_access.log" "phase:1,id:12708,allow"' /etc/modsecurity/crs/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf && \
     sed -i '12 a SecRule REQUEST_URI "@beginsWith /assessment/logfile/apache_error.log" "phase:1,id:12709,allow"' /etc/modsecurity/crs/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf && \
@@ -306,7 +306,7 @@ RUN rm -rf /tmp/aura && \
     a2enmod proxy_http; \
     a2enmod proxy_wstunnel; \
     a2enmod headers; \
-    a2enconf aura; \
+    a2enconf docassemble; \
     echo 'export TERM=xterm' >> /etc/bash.bashrc
 
 
@@ -331,4 +331,4 @@ ENV CONTAINERROLE="all" \
     RABBITMQ=""
 
 
-ENTRYPOINT ["/usr/share/aura/webapp/initialize.sh"]
+ENTRYPOINT ["/usr/share/docassemble/webapp/initialize.sh"]
