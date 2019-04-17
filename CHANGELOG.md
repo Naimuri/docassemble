@@ -1,5 +1,313 @@
 # Change Log
 
+<<<<<<< HEAD
+=======
+## [0.4.33] - 2019-04-16
+### Added
+- `XSENDFILE` Docker environment variable.
+### Changed
+- API will now process JSON as well as form-data.
+- By default, `xsendfile` will be set to `False` in the initial
+  Configuration if `BEHINDHTTPSLOADBALANCER` is true.
+### Fixed
+- New version of ProxyFix not called with arguments for processing
+  HTTP scheme.
+
+## [0.4.32] - 2019-04-15
+### Added
+- The `as_df()` method of a table.
+- The `segment`, `segment id`, and `ga id` specifiers.
+- The `log format` Configuration directive.
+- German translations.
+### Changed
+- Upgraded s3cmd.
+### Fixed
+- Error when reading log files in multiple server configuration in
+  Python 3.
+
+## [0.4.31] - 2019-04-07
+### Fixed
+- Errors with `read_qr()`.
+
+## [0.4.30] - 2019-04-07
+### Added
+- The `editable mimetypes` and `editable extensions` configuration
+  directives.
+### Changed
+- The `worker.log` no longer exempt from backup.
+- The Redis database now backed up to rolling backup.
+- Relaxed some restrictions on multiple developers working on same
+  package in their Playgrounds.
+### Fixed
+- Problem with `write()` method of `DAFile`.
+- Problem with creating packages when author not defined.
+- Problem with `source_code` when `debug` mode not in effect.
+
+## [0.4.29] - 2019-03-28
+### Added
+- The `.size_in_bytes()` method for `DAFile`.
+### Fixed
+- Python3 could not write to S3.
+
+## [0.4.28] - 2019-03-28
+### Added
+- Portuguese translations.
+### Fixed
+- Swagger-generated setup.py files in ZIP files could not be parsed.
+- Error with gender set to "other"
+
+## [0.4.27] - 2019-03-27
+### Added
+- The `list collect` feature for allowing users to add multiple items
+  of `DAList` on one screen.
+### Fixed
+- GitHub error with packages that have dependency packages with null
+  attributes.
+
+## [0.4.26] - 2019-03-25
+### Fixed
+- Enter key caused browsers to press the `question back button`.
+- Newest version of `textstat` not compatible with Python 2.7.
+
+## [0.4.25] - 2019-03-22
+### Changed
+- When using Google Drive Sync, deleting file from Playground now
+  permanently deletes file from Google Drive, rather than send it to
+  the Trash.
+### Fixed
+- KeyError during initial GitHub repository creation.
+- Exception could be raised if docstring in a dependency module was
+  bytes.
+- Methods not appearing in Playground sidebar in Python 3.
+- File uploads failing in Internet Explorer.
+
+## [0.4.24] - 2019-03-21
+### Added
+- The `maximum content length` configuration directive.
+- The `image upload type` configuration directive, feature, and field
+  specifier.
+### Fixed
+- Error in `log` service.
+- A long interview title could cause wrapping in the navigation bar on
+  mobile.
+
+## [0.4.23] - 2019-03-19
+### Added
+- The `progress bar multiplier` and `progress bar method` features.
+### Changed
+- Embedded blocks can use generic objects and iterators.
+- Help buttons are now "info" color instead of "secondary" color.
+### Fixed
+- Error when uploading files through the API.
+- Error resulting from `add_action()` under some circumstances.
+
+## [0.4.22] - 2019-03-17
+### Fixed
+- Section setting error.
+
+## [0.4.21] - 2019-03-16
+### Added
+- The `nav.hide()`, `nav.unhide()`, and `nav.visible()` methods.
+### Fixed
+- Excessive memory usage while looking for cron tasks.
+- Could not upload more than one module file to Playground at the same time.
+- Playground Wizard errors.
+
+## [0.4.20] - 2019-03-13
+### Added
+- The `set_save_status()` function.
+- The `id_tag` option to `action_button_html()`.
+- Field number in error messages.
+### Changed
+- Removed redirects after non-standard URL parameters.
+- The `add_action()` button behaves more consistently with `.gather()`.
+- The `new_window` option to `action_button_html()` can be used to set
+  the `target` of the hyperlink.
+### Fixed
+- Field trim JavaScript was affecting file variables and triggering an
+  error.
+
+## [0.4.19] - 2019-03-10
+### Added
+- The `only sets` modifier.
+### Changed
+- The `allow non-idempotent questions` specifier in `metadata` was
+  removed and replaced with a Configuration directive.
+- The `allow non-idempotent questions` Configuration directive is set
+  to `False` by default in the default Configuration.  This will
+  affect new servers but not existing servers.
+- The API validation `Referer` constraint checks against the `Origin` if
+  there is no `Referer`.
+
+## [0.4.18] - 2019-03-09
+### Added
+- Fullscreen option for code editing.
+### Fixed
+- Python 3 errors during GitHub integration process.
+
+## [0.4.17] - 2019-03-08
+### Added
+- The `python packages` Configuration directive and the
+  `PYTHONPACKAGES` Docker environment variable.
+### Fixed
+- Error when updating references in .docx file.
+- `object_type_repr` error raised from Jinja2.
+- `filter()` returning zero elements from non-empty list caused
+  re-gathering.
+- Dueling `uncheck others` fields had wrong CSS after unchecking.
+- Thumbnails for .docx files.
+- Blanking of dates in Firefox on blur.
+
+## [0.4.16] - 2019-03-04
+### Fixed
+- Playground packages copied to wrong location on Python 3.
+
+## [0.4.15] - 2019-03-04
+### Fixed
+- LuaLaTeX was not properly being detected.
+
+## [0.4.14] - 2019-03-04
+### Fixed
+- LibreOffice initialization encountered circularity.
+
+## [0.4.13] - 2019-03-03
+### Changed
+- The `none of the above` specifier can be used with `datatype:
+  object_radio`.
+- The `docassemble.base.util` is now loaded by default.
+- Switched to LuaLaTeX for better Cyrillic support.  Requires server restart.
+
+## [0.4.12] - 2019-03-01
+### Added
+- The `allow reordering` specifier in `table`.
+### Fixed
+- Unicode problem reading S3 keys as strings.
+
+## [0.4.11] - 2019-02-28
+### Added
+- The `error action` specifier in `metadata`.
+
+## [0.4.10] - 2019-02-27
+### Added
+- The `tagged pdf` option for `docx template file` document assembly.
+### Changed
+- The `pdf/a` options now create PDF/A documents directly with
+  LibreOffice.
+- The `comma_list()` and `comma_and_list()` now work with a wider
+  variety of iterables.
+
+## [0.4.9] - 2019-02-25
+### Added
+- Support for sending text messages using WhatsApp using `send_sms`.
+### Changed
+- Non-required file upload variables will be set to `None` instead of
+  being ignored.
+### Fixed
+- Unicode error during package upgrade when `pip show` returns bytes
+  that cannot be decoded as UTF-8.
+- JavaScript error with Google Maps.
+
+## [0.4.8] - 2019-02-24
+### Changed
+- Upgraded Font Awesome to 5.7.2.
+
+## [0.4.7] - 2019-02-23
+### Fixed
+- Unicode problem with user names.
+- Unicode problem with OCR.
+- SQL concurrency problem with row updates.
+- The `instanceName` on file uploads.
+
+## [0.4.6] - 2019-02-19
+### Changed
+- The `error help` metadata specifier now accepts a dictionary of
+  language codes and messages.
+### Added
+- The `verbose error messages` configuration directive.
+### Fixed
+- Unicode problem with Markdown documents.
+- Deep copy error with `get_question_data()`.
+
+## [0.4.5] - 2019-02-18
+### Changed
+- Group gathering with `ask_number=True` will use the value of
+  `there_are_any` if it is defined and set to false.
+- When editing list using a table, completeness of elements will be
+  re-evaluated.
+- Back button embedded in question is now "link" style.
+### Added
+- The `subject_as_html()` and `content_as_html()` methods of objects
+  generated from a `template`.
+- The `hide navbar` feature.
+- The `js_target` URL parameter for embedding the **docassemble**
+  interview into an element on another web site.
+- The `gathered_and_complete()` method of the `DAList` and `DADict`.
+### Fixed
+- Error logging in with Auth0 in Python 3.
+- The `comma_and_list()` function was not Unicode-friendly.
+- Method of adjusting encryption of interviews in session after
+  logging in was inefficient.
+- API verification not working in Python 3.
+- Screen reader in Python 3.
+- Playground commit not pushing to organizational repositories.
+
+## [0.4.4] - 2019-02-15
+### Added
+- The `convertapi secret` configuration directive.
+- API endpoints for listing and deleting Playground files.
+### Fixed
+- JSON serialization with unusual dict keys.
+- Screen scrolling problem in Playground folders.
+
+## [0.4.3] - 2019-02-13
+### Added
+- The `string_types` and `PY2` names, imported from the `six` package.
+- The `allow non-idempotent questions` specifier in `metadata`.
+### Changed
+- The `post` screen part is now positioned below the `right` screen
+  part on small screens.
+### Fixed
+- The screen parts feature was not fully implemented and documented.
+- The `required privileges` feature was not fully implemented.
+- Editing yourself through `/userlist` would disable yourself.
+- Error with text-to-speech cache.
+- Non-required file upload variables were being set to `'None'`
+  instead of being ignored.
+
+## [0.4.2] - 2019-02-10
+### Added
+- Additional SQL indexes.
+- The `default screen parts` block.
+- The `required privileges` specifier in `metadata`.
+### Changed
+- The `set_title()` function was renamed to `set_parts()` and now
+  supports setting any screen part.
+### Fixed
+- Error with OCR.
+- Error with screen reader.
+- Error with `concatenate_files()`.
+- The current section when showing a `nav` in a question was not
+  always current.
+- Wrong formatting of subsections in sections sidebar under some
+  circumstances.
+
+## [0.4.1] - 2019-02-04
+### Added
+- Placeholder CSS classes for customization.
+- Support for alternative Redis ports and database offsets.
+
+## [0.4.0] - 2019-02-04
+### Added
+- The `DAPYTHONVERSION` Docker environment variable.
+- The `text_type()` function.
+### Changed
+- The system is now compatible with Python 3.5.
+- The `subdivision_type()` algorithm was improved.
+### Fixed
+- The update script failed under some circumstances due to a SQL
+  error.
+
+>>>>>>> daca8115... xsendfile default; JSON in API; ProxyFix upgrade
 ## [0.3.36] - 2019-01-24
 ### Fixed
 - Not all login methods were redirecting the user back to the
